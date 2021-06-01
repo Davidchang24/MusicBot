@@ -1,18 +1,36 @@
-const { AkairoClient } = require("discord-akairo");
+const {
+  AkairoClient,
+  CommandHandler,
+  InhibitorHandler,
+  ListenerHandler,
+} = require("discord-akairo");
 const config = require("./config/config.json");
 
-class MusicClient extends AkairoClient {
+class MyClient extends AkairoClient {
   constructor() {
     super(
       {
-        // Options for Akairo go here.
+        ownerID: "327752924472279040",
       },
       {
-        // Options for discord.js goes here.
+        disableMentions: "everyone",
       }
     );
+
+    this.commandHandler = new CommandHandler(this, {
+      directory: "./commands/",
+      prefix: "?",
+    });
+
+    this.inhibitorHandler = new InhibitorHandler(this, {
+      directory: "./inhibitors/",
+    });
+
+    this.listenerHandler = new ListenerHandler(this, {
+      directory: "./listeners/",
+    });
   }
 }
 
-const client = new MusicClient();
-client.login(config.token).then(console.log("Bot is online!"));
+const client = new MyClient();
+client.login(config.token);
