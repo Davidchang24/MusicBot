@@ -9,7 +9,7 @@ class ReadyListener extends Listener {
   }
 
   exec() {
-    console.log("I'm ready!");
+    console.log(`${this.client.user.tag} is online!`);
   }
 }
 
