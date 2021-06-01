@@ -1,9 +1,18 @@
-const Discord = require("discord.js");
-const client = new Discord.Client();
-const config = require("./config.json");
+const { AkairoClient } = require("discord-akairo");
+const config = require("./config/config.json");
 
-client.on("ready", () => {
-  console.log("The client is ready");
-});
+class MusicClient extends AkairoClient {
+  constructor() {
+    super(
+      {
+        // Options for Akairo go here.
+      },
+      {
+        // Options for discord.js goes here.
+      }
+    );
+  }
+}
 
-client.login(config.token);
+const client = new MusicClient();
+client.login(config.token).then(console.log("Bot is online!"));
